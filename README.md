@@ -1,144 +1,61 @@
-AgroVision AI – Vision System for Crop and Pest Monitoring
+# AgroVision AI — Crop & Pest Monitoring System
 
-Overview
+An AI-driven agricultural advisory system that detects crop diseases, identifies pests, and recommends suitable crops from soil parameters — combined into a single recommendation and served through a working API and web interface.
 
-AgroVision AI is an artificial intelligence–based agricultural advisory system that helps farmers identify crop diseases, detect harmful pests, and recommend suitable crops based on soil parameters.
+## Overview
 
-The system integrates multiple machine learning and deep learning models to provide intelligent insights for improving crop productivity and preventing crop damage.
+The system integrates three machine learning models:
 
-The project consists of three main AI modules:
-	•	Crop Disease Detection using deep learning
-	•	Pest Detection using computer vision
-	•	Soil-based Crop Recommendation using machine learning
+- **Crop disease detection** — CNN trained on the PlantVillage dataset
+- **Pest detection** — computer vision model trained on an insect image dataset
+- **Soil-based crop recommendation** — ML model trained on soil nutrient data (N, P, K, temperature, humidity, pH)
 
-These modules are combined using a decision engine that provides the final agricultural recommendation.
+A decision engine combines the outputs of all three into one final recommendation.
 
+## My contribution
 
+This started as a joint project with [Arjun Khimta](https://github.com/ArjunKhimta), who built and trained the three ML models and the original decision engine. I built the deployment layer on top: a FastAPI backend (`backend/api.py`) with an `/analyze` endpoint that accepts leaf and pest images, plus a frontend (`frontend/`) that lets a user upload images and run the analysis from the browser — turning the original research notebooks into something actually usable end to end.
 
-Features
-	•	Crop disease detection from plant leaf images
-	•	Pest detection from insect images
-	•	Crop recommendation based on soil nutrient values
-	•	Integrated decision engine to combine model outputs
-	•	Modular architecture for easy model replacement or retraining
+## Project structure
 
-Project Structure:
-
-AgroVision-AI
-│
+```
 ├── main.py
-├── app/
-│   └── decision_engine.py
-│
-├── models/
-│   ├── crop_disease/
-│   ├── pest/
-│   └── soil/
-│
-├── notebooks/
-│   ├── 1_crop_disease/
-│   ├── 2_soil_analysis/
-│   └── 3_pest_detection/
-│
-├── reports/
-│
-├── structure.txt
-└── .gitignore
-Explanation:
-	•	main.py – Main application entry point
-	•	decision_engine.py – Combines outputs of multiple models
-	•	models/ – Contains trained model weights
-	•	notebooks/ – Training scripts for the ML models
-	•	reports/ – Experimental results and analysis
+├── backend/
+│   ├── api.py              # FastAPI app, /analyze endpoint
+│   └── decision_engine.py  # combines model outputs
+├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
+├── models/                 # trained model weights
+└── notebooks/               # training notebooks for each model
+```
 
+## Built with
 
-Dataset
+Python, PyTorch, scikit-learn, FastAPI, NumPy, Pandas
 
-Due to size limitations, the datasets are not included in this repository.
-Download them from the following sources and place them inside the data/ folder.
+## Running it
 
-Crop Disease Dataset
+```bash
+git clone https://github.com/akshiit02/AI-Vision-System-for-Crop-and-Pest-Monitoring.git
+cd AI-Vision-System-for-Crop-and-Pest-Monitoring
+pip install fastapi uvicorn torch scikit-learn numpy pandas python-multipart
+uvicorn backend.api:app --reload
+```
+Then open `frontend/index.html` in a browser.
 
-PlantVillage Dataset
-https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset
-Place inside:
-data/crop_disease/
-Pest Detection Dataset
+Datasets aren't included here due to size — download them yourself and place them as described in the notebooks:
+- [PlantVillage Dataset](https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset)
+- [Dangerous Insects Dataset](https://www.kaggle.com/datasets/tarundalal/dangerous-insects-dataset)
+- [Crop Recommendation Dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
 
-Dangerous Insects Dataset
-https://www.kaggle.com/datasets/tarundalal/dangerous-insects-dataset
+## What I'd add next
 
-Place inside:
-data/pest/
-Crop Recommendation Dataset
+- Deploy the backend so the demo doesn't require local setup
+- Add basic auth + usage logging on the API
+- Real-time camera-based monitoring instead of single-image upload
 
-Crop Recommendation Dataset
-https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset
-
-Place inside:
-data/soil/
-Installation
-
-Clone the repository:
-git clone https://github.com/ArjunKhimta/AgroVision-AI-AI-Vision-System-for-Crop-and-Pest-Monitoring.git
-cd AgroVision-AI-AI-Vision-System-for-Crop-and-Pest-Monitoring
-pip install -r requirements.txt
-
-Running the Project
-
-Run the main application:
-python main.py
-The system will:
-	1.	Detect crop diseases from leaf images
-	2.	Identify harmful pests
-	3.	Recommend suitable crops based on soil conditions
-	4.	Combine results using the decision engine
-
-Models Used
-
-Crop Disease Detection
-	•	Deep Learning CNN model
-	•	Trained on the PlantVillage dataset
-
-Pest Detection
-	•	Computer Vision classification model
-	•	Trained on insect image dataset
-
-Crop Recommendation
-	•	Machine learning model trained on soil nutrient dataset
-
-Soil parameters used include:
-	•	Nitrogen
-	•	Phosphorus
-	•	Potassium
-	•	Temperature
-	•	Humidity
-	•	pH
-
-
-
-Technologies Used
-	•	Python
-	•	PyTorch
-	•	Scikit-learn
-	•	NumPy
-	•	Pandas
-
-
-Future Improvements
-	•	Real-time camera based crop monitoring
-	•	Mobile application for farmers
-	•	Weather data integration
-	•	Disease severity prediction
-
-
-Authors:
+## Authors
 
 Arjun Khimta, Akshit Sharma
-
-This project was developed as part of an AI/ML system for crop health monitoring and agricultural decision support.
-
-
-License
-
-This project is intended for educational and research purposes.
