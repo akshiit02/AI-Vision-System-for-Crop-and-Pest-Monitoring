@@ -40,7 +40,7 @@ Python, PyTorch, scikit-learn, FastAPI, NumPy, Pandas
 ```bash
 git clone https://github.com/akshiit02/AI-Vision-System-for-Crop-and-Pest-Monitoring.git
 cd AI-Vision-System-for-Crop-and-Pest-Monitoring
-pip install fastapi uvicorn torch scikit-learn numpy pandas python-multipart
+pip install fastapi uvicorn python-multipart torch torchvision pillow joblib scikit-learn numpy pandas
 uvicorn backend.api:app --reload
 ```
 Then open `frontend/index.html` in a browser.
