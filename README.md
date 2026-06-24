@@ -1,4 +1,4 @@
-# AgroVision AI — Crop & Pest Monitoring System
+# AgroVision AI — Crop, Soil & Pest Monitoring System
 
 An AI-driven agricultural advisory system that detects crop diseases, identifies pests, and recommends suitable crops from soil parameters — combined into a single recommendation and served through a working API and web interface.
 
